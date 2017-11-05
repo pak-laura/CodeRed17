@@ -4,6 +4,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import Form from './Form';
 import FetchCasing from './FetchCasing';
 import { sizes, weights, grades } from './data';
+import calculate from './calculate';
+import MyList from './MyList';
 
 export default class Main extends React.Component {
   state = {
@@ -59,11 +61,10 @@ export default class Main extends React.Component {
         onListItemPressed={this.handleListItemPressed}
       >
         <FetchCasing size={size} weight={weight}>
-          {casings => <Text>{JSON.stringify(casings)}</Text>}
+          {({ nominalId, driftId }) => (
+            <MyList items={calculate(size, weight, grade, nominalId, driftId)} />
+          )}
         </FetchCasing>
-        <Text>{size}</Text>
-        <Text>{weight}</Text>
-        <Text>{grade}</Text>
       </Form>
     );
   }
