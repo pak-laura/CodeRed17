@@ -28,7 +28,9 @@ export default class App extends React.Component {
 							 	value={this.state.text}
 							/>
 						</View>
-						<Button style={{flex:1}} onPress ={Alert.alert("what")} title="Submit" color="#ba9f78"/>
+						<View style = {styles.submitContainer}>
+							<Button style={{flex:1}} onPress ={Alert.alert("what")} title="Submit" color="#ba9f78"/>
+						</View>
 					</View>
 				</Image>
     );
@@ -56,11 +58,15 @@ const styles = StyleSheet.create({
 	},
 	usernameContainer:{
 		flex: 1,
-		justifyContent:'center',
+		justifyContent:'flex-end',
 		color:'white',
 	},
 	passwordContainer:{
 		flex: 1,
+		justifyContent: 'center',
+	},
+	submitContainer:{
+		flex:1,
 		justifyContent: 'center',
 	},
 });
