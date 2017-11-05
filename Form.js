@@ -1,22 +1,57 @@
 import React from 'react';
-import DropdownMenu from 'react-native-dropdown-menu';
-
-import data from './data';
+import styled from 'styled-components/native';
+import { Text } from 'react-native';
+import Container from './components/Container';
 
 const mapper = ['size', 'weight', 'grade'];
 
-const Form = ({ children, handler }) => (
-  <DropdownMenu
-    style={{ flex: 1 }}
-    bgColor="red"
-    tintColor="white"
-    selectItemColor="red"
-    data={data}
-    maxHeight={800}
-    handler={(selection, row) => handler(mapper[selection], data[selection][row])}
-  >
-    {children}
-  </DropdownMenu>
+const ThreeColumn = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
+
+const MenuItem = styled.TouchableOpacity`
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+`;
+
+const ListItem = styled.TouchableOpacity`
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+
+const Options = styled.FlatList``;
+
+const Form = ({
+  children, size, weight, grade, onSelect, optionsData, onListItemPressed,
+}) => (
+  <Container>
+    <ThreeColumn>
+      <MenuItem onPress={() => onSelect(1)}>
+        <Text>{size}</Text>
+      </MenuItem>
+      <MenuItem onPress={() => onSelect(2)}>
+        <Text>{weight}</Text>
+      </MenuItem>
+      <MenuItem onPress={() => onSelect(3)}>
+        <Text>{grade}</Text>
+      </MenuItem>
+    </ThreeColumn>
+    {!optionsData.length ? (
+        children
+      ) : (
+        <Options
+          data={optionsData}
+          renderItem={({ item }) => (
+            <ListItem onPress={() => onListItemPressed(item)}>
+              <Text>{item}</Text>
+            </ListItem>
+          )}
+          keyExtractor={item => item}
+        />
+      )}
+  </Container>
 );
 
 export default Form;
