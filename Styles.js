@@ -16,6 +16,13 @@ export default StyleSheet.create({
   item: {
     flex: 1,
     flexDirection: 'row',
+    padding: 10,
+  },
+  itemCool: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: 'rgba(186, 159, 120, 0.5)',
   },
   itemText: {
     fontSize: 20,

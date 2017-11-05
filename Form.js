@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
 import Icon from '@expo/vector-icons/Entypo';
 
 import Container from './components/Container';
@@ -17,15 +17,35 @@ const MenuItem = styled.TouchableOpacity`
   padding-top: 10px;
   padding-bottom: 10px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 `;
 
 const ListItem = styled.TouchableOpacity`
   padding-top: 5px;
   padding-bottom: 5px;
 `;
+
+const Row = styled.View`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 12px;
+`;
+
+const IconRow = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Label = styled.Text`
+  font-weight: bold;
+  font-size: 18;
+`;
+
+const SelectorValue = styled.Text`font-size: 16;`;
 
 const Options = styled.FlatList``;
 
@@ -40,43 +60,66 @@ const Form = ({
   onListItemPressed,
 }) => {
   const showChildren = !optionsData.length;
-  const color = '#900';
+  const color = 'rgb(67, 73, 46)';
   return (
     <Container>
       <ThreeColumn>
         <MenuItem onPress={() => onSelect(1)}>
-          <Text>{size}</Text>
-          <Icon
-            name={currName !== 'size' || showChildren ? 'triangle-down' : 'triangle-up'}
-            size={25}
-            color={color}
-          />
+          <Row>
+            <Label>Casing Size</Label>
+          </Row>
+          <IconRow>
+            <SelectorValue>{size}</SelectorValue>
+            <Icon
+              name={currName !== 'size' || showChildren ? 'triangle-down' : 'triangle-up'}
+              size={25}
+              color={color}
+            />
+          </IconRow>
         </MenuItem>
         <MenuItem onPress={() => onSelect(2)}>
-          <Text>{weight}</Text>
-          <Icon
-            name={currName !== 'weight' || showChildren ? 'triangle-down' : 'triangle-up'}
-            size={25}
-            color={color}
-          />
+          <Row>
+            <Label>Weight</Label>
+          </Row>
+          <IconRow>
+            <SelectorValue>{weight}</SelectorValue>
+            <Icon
+              name={currName !== 'weight' || showChildren ? 'triangle-down' : 'triangle-up'}
+              size={25}
+              color={color}
+            />
+          </IconRow>
         </MenuItem>
         <MenuItem onPress={() => onSelect(3)}>
-          <Text>{grade}</Text>
-          <Icon
-            name={currName !== 'grade' || showChildren ? 'triangle-down' : 'triangle-up'}
-            size={25}
-            color={color}
-          />
+          <Row>
+            <Label>Grade</Label>
+          </Row>
+          <IconRow>
+            <SelectorValue>{grade}</SelectorValue>
+            <Icon
+              name={currName !== 'grade' || showChildren ? 'triangle-down' : 'triangle-up'}
+              size={25}
+              color={color}
+            />
+          </IconRow>
         </MenuItem>
       </ThreeColumn>
       {showChildren ? (
         children
       ) : (
         <Options
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                height: 1,
+                backgroundColor: '#d3d3d3',
+              }}
+            />
+          )}
           data={optionsData}
           renderItem={({ item }) => (
             <ListItem onPress={() => onListItemPressed(item)}>
-              <Text>{item}</Text>
+              <Text style={{ paddingLeft: 20, fontSize: 25 }}>{item}</Text>
             </ListItem>
           )}
           keyExtractor={item => item}

@@ -4,10 +4,9 @@ import Styles from './Styles';
 
 export default ({ items }) => (
   <FlatList
-    style={{ marginLeft: 10, marginRight: 10 }}
     data={items}
-    renderItem={({ item }) => (
-      <View style={Styles.item}>
+    renderItem={({ item, index }) => (
+      <View style={index % 2 === 0 ? Styles.item : Styles.itemCool}>
         <View style={{ flex: 1 }}>
           <Text style={Styles.itemText}>{item.name}</Text>
         </View>
