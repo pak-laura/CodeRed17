@@ -12,6 +12,7 @@ export default class Main extends React.Component {
     size: 4.5,
     weight: 9.5,
     grade: 110000,
+    length: 1,
     optionsData: [],
     currName: '',
   };
@@ -57,17 +58,26 @@ export default class Main extends React.Component {
     }
   };
 
+  onChangeText = (length) => {
+    this.setState({
+      length,
+    });
+  };
+
   render() {
-    const { size, weight, grade } = this.state;
+    const {
+      size, weight, grade, length,
+    } = this.state;
     return (
       <Form
         {...this.state}
         onSelect={this.handleSelect}
         onListItemPressed={this.handleListItemPressed}
+        onChangeText={this.onChangeText}
       >
         <FetchCasing size={size} weight={weight}>
           {({ nominalId, driftId }) => (
-            <MyList items={calculate(size, weight, grade, nominalId, driftId)} />
+            <MyList items={calculate(size, weight, grade, nominalId, driftId, length)} />
           )}
         </FetchCasing>
       </Form>

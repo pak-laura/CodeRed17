@@ -1,6 +1,6 @@
 import math from 'mathjs';
 
-export default (case_size, weight, grade, nom_id, drift_id) => {
+export default (case_size, weight, grade, nom_id, drift_id, length) => {
   const a2h2 = Math.pow(case_size, 2) - Math.pow(nom_id, 2);
 
   const max_OD = 1.01 * case_size;
@@ -12,6 +12,10 @@ export default (case_size, weight, grade, nom_id, drift_id) => {
   const nom_cap = 0.0009714 * Math.pow(nom_id, 2);
   const min_cap = 0.0009714 * Math.pow(min_ID, 2);
   const nom_wall_thick = (case_size - nom_id) / 2;
+
+  const max_vol = math.round(max_cap * length, 4);
+  const nom_vol = math.round(nom_cap * length, 4);
+  const min_vol = math.round(min_cap * length, 4);
 
   const myarr = [
     {
@@ -28,14 +32,17 @@ export default (case_size, weight, grade, nom_id, drift_id) => {
       name: 'Max Capacity',
       value: math.round(max_cap, 4),
     },
+    { name: 'Max Volume', value: max_vol },
     {
       name: 'Nominal Capacity',
       value: math.round(nom_cap, 4),
     },
+    { name: 'Nominal Volume', value: nom_vol },
     {
       name: 'Minimum Capacity',
       value: math.round(min_cap, 4),
     },
+    { name: 'Min Volume', value: min_vol },
   ];
 
   let burst_press = 0;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import Icon from '@expo/vector-icons/Entypo';
 
 import Container from './components/Container';
@@ -10,6 +10,7 @@ const ThreeColumn = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 `;
 
 const MenuItem = styled.TouchableOpacity`
@@ -58,6 +59,7 @@ const Form = ({
   onSelect,
   optionsData,
   onListItemPressed,
+  onChangeText,
 }) => {
   const showChildren = !optionsData.length;
   const color = 'rgb(67, 73, 46)';
@@ -71,7 +73,7 @@ const Form = ({
           <IconRow>
             <SelectorValue>{size}</SelectorValue>
             <Icon
-              name={currName !== 'size' || showChildren ? 'triangle-down' : 'triangle-up'}
+              name={currName !== 'size' || showChildren ? 'triangle-up' : 'triangle-down'}
               size={25}
               color={color}
             />
@@ -84,7 +86,7 @@ const Form = ({
           <IconRow>
             <SelectorValue>{weight}</SelectorValue>
             <Icon
-              name={currName !== 'weight' || showChildren ? 'triangle-down' : 'triangle-up'}
+              name={currName !== 'weight' || showChildren ? 'triangle-up' : 'triangle-down'}
               size={25}
               color={color}
             />
@@ -97,13 +99,27 @@ const Form = ({
           <IconRow>
             <SelectorValue>{grade}</SelectorValue>
             <Icon
-              name={currName !== 'grade' || showChildren ? 'triangle-down' : 'triangle-up'}
+              name={currName !== 'grade' || showChildren ? 'triangle-up' : 'triangle-down'}
               size={25}
               color={color}
             />
           </IconRow>
         </MenuItem>
       </ThreeColumn>
+      <TextInput
+        name="length"
+        keyboardType="numeric"
+        style={{
+          fontSize: 20,
+          fontWeight: 'bold',
+          textAlign: 'right',
+          width: '100%',
+          padding: 5,
+          margin: 2,
+        }}
+        onChangeText={onChangeText}
+        placeholder="Casing Length (feet)"
+      />
       {showChildren ? (
         children
       ) : (
