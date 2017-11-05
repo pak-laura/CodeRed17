@@ -4,6 +4,7 @@ import Styles from './Styles';
 
 export default ({ items }) => (
   <FlatList
+    style={{ marginLeft: 10, marginRight: 10 }}
     data={items}
     renderItem={({ item }) => (
       <View style={Styles.item}>

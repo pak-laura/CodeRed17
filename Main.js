@@ -34,7 +34,12 @@ export default class Main extends React.Component {
   };
 
   handleSelect = (i) => {
-    if (i === 1) {
+    if (this.state.currName !== '') {
+      this.setState({
+        optionsData: [],
+        currName: '',
+      });
+    } else if (i === 1) {
       this.setState({
         optionsData: sizes,
         currName: 'size',

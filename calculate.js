@@ -15,40 +15,26 @@ export default (case_size, weight, grade, nom_id, drift_id) => {
 
   const myarr = [
     {
-      name: 'max_OD',
-      value: max_OD,
+      name: 'Max ID',
+      value: math.round(max_ID, 3),
+    },
+    { name: 'Nominal ID', value: nom_id },
+    { name: 'Drift ID', value: drift_id },
+    {
+      name: 'Min ID',
+      value: math.round(min_ID, 3),
     },
     {
-      name: 'min_OD',
-      value: min_OD,
+      name: 'Max Capacity',
+      value: math.round(max_cap, 4),
     },
     {
-      name: 'PEW',
-      value: PEW,
+      name: 'Nominal Capacity',
+      value: math.round(nom_cap, 4),
     },
     {
-      name: 'max_ID',
-      value: max_ID,
-    },
-    {
-      name: 'min_ID',
-      value: min_ID,
-    },
-    {
-      name: 'max_cap',
-      value: max_cap,
-    },
-    {
-      name: 'nom_cap',
-      value: nom_cap,
-    },
-    {
-      name: 'min_cap',
-      value: min_cap,
-    },
-    {
-      name: 'nom_wall_thick',
-      value: nom_wall_thick,
+      name: 'Minimum Capacity',
+      value: math.round(min_cap, 4),
     },
   ];
 
@@ -64,11 +50,12 @@ export default (case_size, weight, grade, nom_id, drift_id) => {
   } else {
     collapse = 2 * grade * nom_wall_thick / (case_size + nom_wall_thick);
   }
-  const tensile = grade * a2h2 * Math.PI / 4 - (grade * a2h2 * Math.PI / 4) % 1000;
 
-  myarr.push({ name: 'burst_press', value: burst_press });
-  myarr.push({ name: 'collapse', value: collapse });
-  myarr.push({ name: 'tensile', value: tensile });
+  const tensile = grade * a2h2 * Math.PI / 4;
+
+  myarr.push({ name: 'Burst Pressure', value: math.round(burst_press) });
+  myarr.push({ name: 'Collapse Pressure', value: math.round(collapse) });
+  myarr.push({ name: 'Tensile Limit', value: math.round(tensile / 1000) * 1000 });
 
   return myarr;
 };
